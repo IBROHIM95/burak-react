@@ -15,6 +15,7 @@ ReactDom.render(
     <Provider store={store}>
     <ThemeProvider theme={theme}>
     <CssBaseline/>
+    <div>installing yarn</div>
     <App />
   </ThemeProvider>,
      </Provider>
