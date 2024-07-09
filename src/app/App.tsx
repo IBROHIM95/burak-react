@@ -3,10 +3,12 @@ import React from 'react';
 import { Container } from '@mui/material';
 import '../css/app.css';
 
-import { Link, Route, Router, Switch } from 'react-router-dom';
-import About from './screens/About';
-import Users from './screens/Users';
-import Home from './screens/Home';
+import { Link, Route, Switch } from 'react-router-dom';
+
+import HomePage from './screens/homePage/index';
+import ProductPage from './screens/productsPage';
+import OrderPage from './screens/ordersPage';
+import UserPage from './screens/userPage';
 
 function App() {
   return (
@@ -19,25 +21,29 @@ function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/products">ProductsPage</Link>
             </li>
             <li>
-              <Link to="/users">Users</Link>
+              <Link to="/orders">OrdersPage</Link>
+            </li>
+            <li>
+              <Link to="/member-page">UserPage</Link>
             </li>
           </ul>
         </nav>
 
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
          <Switch>
-          <Route path="/about">
-            <About />
+         <Route path="/products">
+            <ProductPage />
           </Route>
-          <Route path="/users">
-            <Users />
+         <Route path="/orders">
+            <OrderPage />
+          </Route>
+         <Route path="/member-page">
+            <UserPage />
           </Route>
           <Route path="/">
-            <Home />
+            <HomePage />   
           </Route>
         </Switch>
       </div>
@@ -47,3 +53,5 @@ function App() {
 }
 
 export default App;
+
+// Homepage pathi '/' doim eng oxirida turishi kerak
