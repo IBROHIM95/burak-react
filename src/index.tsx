@@ -21,7 +21,7 @@ ReactDom.render(
     <Router>
       <App />
     </Router>
-    <div>installing yarn</div>
+    
   </ThemeProvider>,
      </Provider>
   </React.StrictMode>,
