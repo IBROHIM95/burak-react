@@ -6,10 +6,12 @@ import HomePage from './screens/homePage/index';
 import ProductPage from './screens/productsPage';
 import OrderPage from './screens/ordersPage';
 import UserPage from './screens/userPage';
-import { HomeNavbar } from './components/headers/HomeNavbar';
-import { OtherNavbar } from './components/headers/OtherNavbar';
-import { Footer } from './components/footer';
+import  HomeNavbar  from './components/headers/HomeNavbar';
+import  OtherNavbar  from './components/headers/OtherNavbar';
+import Footer  from './components/footer';
 import '../css/navbar.css'
+import '../css/app.css'
+import '../css/footer.css'
 import HelpPage from './screens/helpPage';
 
 function App() {
