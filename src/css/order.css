@@ -1,0 +1,216 @@
+.order-page {
+    width: 100%;
+    
+    display: flex;
+    flex-direction: row;
+    
+    margin-top: 0px;
+    margin-bottom: 50px;
+}
+
+.order-page  .order-container{
+    width: 100%;
+    position: relative;
+    margin-top: 20px;
+    display: flex;
+    gap: 5px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.order-page  .order-left .order-main-box{
+    margin-top: 0px;
+    width: 700px;
+    height: 200px;
+    display: flex;
+    
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px ;
+    box-shadow: 14px 14px 4px 0px #bcbcbf, 0px 0px 9px 14px #d3d3e7 inset,
+    0px 4px 16px 0px rgba(242, 189, 87, 0.04) inset;
+}
+
+.order-page  .order-left .order-main-box .order-nav-frame{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.order-page .order-main-box{
+    
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.order-page .order-main-box .order-box-scroll{
+ width: 700px;  
+ height: 50px; 
+ position: relative;
+ padding-left: 20px;
+ padding-right: 110px;
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+ align-items: center;
+ 
+
+}
+.order-page .order-main-box .order-box-scroll .order-dish-img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+.order-page .order-main-box .total-price-box{
+    display: flex;
+    flex-direction: row;
+
+}
+.order-page .order-main-box .total-price-box .box-total{
+    display: flex;
+    flex-direction: row;
+} 
+.order-page .order-main-box .total-price-box .verify-button{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.order-page .order-main-box .total-price-box{
+   width: 100%;
+   padding-left: 20px;
+   padding-right: 20px;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-around; 
+}
+
+.order-page .order-main-box .total-price-box .box-total{
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
+}
+.order-page .order-main-box .total-price-box .verify-button{
+    width: 170px;
+    font-size: 12px;
+}
+.order-page .order-main-box .total-price-box .verify-button-pause{
+    width: 90px;
+    height: 30px;
+    font-size: 12px;
+    line-height: 3px;
+}
+
+.order-page .order-right{
+    height: auto;
+    margin-top: 160px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.order-page .order-right .order-info-box{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin-left: 30px;
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow: 14px 14px 4px 0px #bcbcbf, 0px 0px 9px 14px #d3d3e7 inset,
+    0px 4px 16px 0px rgba(242, 189, 87, 0.04) inset;
+}
+.order-page .order-right .order-info-box .member-box .order-user-avatar{
+   
+ height: 100px;
+}
+.order-page .order-right .order-info-box .member-box .order-user-icon-box{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left:58%;
+    top: 45%;
+    border-radius: 50%;
+    border: 2px solid rgb(208, 206, 206);
+    background: rgb(204, 203, 203);
+    color: white;
+    height: 20px;
+}
+
+.order-page .order-right .order-info-box .member-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.order-page .order-right .order-info-box .line{
+    width: 250px;
+    height: 1px;
+    margin-bottom: 20px;
+    background: rgb(95, 93, 93);
+    
+}
+
+.order-page .order-right .order-info-box .location{
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    left: 20px;
+    bottom: 20px;
+
+}
+.order-page .order-right .cards{
+    position: relative;
+    width: 300px;
+    height: 280px;
+    margin-left: 30px;
+    padding-top: 20px;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    border-radius: 20px;
+    box-shadow: 14px 14px 4px 0px #bcbcbf, 0px 0px 9px 14px #d3d3e7 inset,
+    0px 4px 16px 0px rgba(242, 189, 87, 0.04) inset;
+}
+
+.order-page .order-right .cards .cards-input input{
+ position: relative;   
+ height: 30px;
+ width: 280px;
+ border: 2px solid rgb(187, 185, 185);
+ border-radius: 5px;
+}
+
+.order-page .order-right .cards .cards-icon{
+    position: absolute;
+    bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
