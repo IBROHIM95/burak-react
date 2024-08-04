@@ -29,10 +29,10 @@ export default function PopularDishes() {
                 <Box className="category-title" >Populer Dishes</Box>
                 <Stack className="cards-frame" >
                     {popularDishes.length !== 0 ? (
-                  popularDishes.map((ele: Product) => {
-                    const imagePath = `${serverApi}/${ele.productImage[0]}`
+                  popularDishes.map((product: Product) => {
+                    const imagePath = `${serverApi}/${product.productImage[0]}`
                   return (
-                    <CssVarsProvider key={ele._id} >
+                    <CssVarsProvider key={product._id} >
                      <Card className="card" >
                      <CardCover>
         <img alt="" src={imagePath}   />
@@ -47,7 +47,7 @@ export default function PopularDishes() {
            fontSize='lg'
            textColor='#fff'
            mb={1}>
-            {ele.productName}
+            {product.productName}
          </Typography>
          <Typography
             sx={{fontWeight: 'md',
@@ -55,7 +55,7 @@ export default function PopularDishes() {
                 alignItems:'center',
                 display:'flex'
             }}>
-            {ele.productViews}
+            {product.productViews}
             <VisibilityIcon sx={{ fontSize:25, margin:'5px' }} />
          </Typography>
         </Stack> 
@@ -73,7 +73,7 @@ export default function PopularDishes() {
         <Typography 
           startDecorator={<DescriptionOutlinedIcon/>}
           textColor='neutral.300' >
-            {ele.productDesc}
+            {product.productDesc}
         </Typography>
       </CardOverflow>
     </Card>
