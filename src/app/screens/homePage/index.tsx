@@ -5,13 +5,15 @@ import Events from "./Events";
 import NewDishes from "./NewDishes";
 import Statistics from "./Statistics";
 import '../../../css/home.css'
-import { createSelector, Dispatch } from "@reduxjs/toolkit";
+import {  Dispatch } from "@reduxjs/toolkit";
+import {createSelector,} from 'reselect'
 import { Product } from "../../../lip/types/product";
 import { setPopularDishes } from "./slice";
 import { useDispatch, useSelector } from "react-redux";
 import { retrievePopularDishes } from "./selector";
 import PopularDishes from "./PopularDishes";
-import { AppRootState } from "../../../lip/types/screen";
+
+
 
 
 
@@ -25,8 +27,11 @@ const popularDishesRetriever = createSelector(
 
 
  export default function HomePage() {
-   const {setPopularDishes} = actionDispatch(useDispatch());
-   const {popularDishes} = useSelector(popularDishesRetriever)
+  //  const {setPopularDishes} = actionDispatch(useDispatch());
+  //  const {popularDishes} = useSelector(popularDishesRetriever);
+
+   console.log(process.env.REACT_APP_API_URL);
+   
   
 
   useEffect(() => {}, [] );
