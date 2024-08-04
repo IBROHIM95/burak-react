@@ -8,11 +8,13 @@ import '../../../css/home.css'
 
 import {  Dispatch } from "@reduxjs/toolkit";
 import { Product } from "../../../lip/types/product";
-import { setNewDishes, setPopularDishes } from "./slice";
+import { setNewDishes, setPopularDishes, setTopUsers } from "./slice";
 import { useDispatch } from "react-redux";
 import PopularDishes from "./PopularDishes";
 import ProductService from "../../service/ProductService";
 import { ProductCollection } from "../../../lip/enums/product.enum";
+import { Member } from "../../../lip/types/member";
+import MemberService from "../../service/MemberService";
 
 
 
@@ -21,13 +23,14 @@ import { ProductCollection } from "../../../lip/enums/product.enum";
 const actionDispatch = (dispatch: Dispatch) => ({
   setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
   setNewDishes: (data: Product[]) => dispatch(setNewDishes(data)),
+  setTopUsers: (data: Member[]) => dispatch(setTopUsers(data))
 });
 
 
 
  export default function HomePage() {
-   const {setPopularDishes} = actionDispatch(useDispatch());
-   const {setNewDishes} = actionDispatch(useDispatch());
+   const {setPopularDishes, setNewDishes, setTopUsers} = actionDispatch(useDispatch());
+   
   
 
    console.log(process.env.REACT_APP_API_URL);
@@ -64,6 +67,13 @@ const actionDispatch = (dispatch: Dispatch) => ({
       setNewDishes(data)
      })
      .catch((err) => console.log(err))
+
+     const member = new MemberService();
+     member
+     .getTopUsers()
+     .then((data) => setTopUsers(data))
+      
+
   }, []);
 
   
