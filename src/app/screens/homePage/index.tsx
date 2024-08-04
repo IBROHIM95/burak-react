@@ -5,13 +5,14 @@ import Events from "./Events";
 import NewDishes from "./NewDishes";
 import Statistics from "./Statistics";
 import '../../../css/home.css'
+
 import {  Dispatch } from "@reduxjs/toolkit";
-import {createSelector,} from 'reselect'
 import { Product } from "../../../lip/types/product";
 import { setPopularDishes } from "./slice";
-import { useDispatch, useSelector } from "react-redux";
-import { retrievePopularDishes } from "./selector";
+import { useDispatch } from "react-redux";
 import PopularDishes from "./PopularDishes";
+import ProductService from "../../service/ProductService";
+import { ProductCollection } from "../../../lip/enums/product.enum";
 
 
 
@@ -20,21 +21,34 @@ import PopularDishes from "./PopularDishes";
 const actionDispatch = (dispatch: Dispatch) => ({
   setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
 });
-const popularDishesRetriever = createSelector(
-  retrievePopularDishes,
-  (popularDishes) => ({popularDishes})
-)
+
 
 
  export default function HomePage() {
-  //  const {setPopularDishes} = actionDispatch(useDispatch());
-  //  const {popularDishes} = useSelector(popularDishesRetriever);
+   const {setPopularDishes} = actionDispatch(useDispatch());
+  
 
    console.log(process.env.REACT_APP_API_URL);
    
   
 
-  useEffect(() => {}, [] );
+  useEffect(() => {
+    const product = new ProductService();
+    product
+     .getProducts({
+      page: 1,
+      limit:4,
+      order: 'productViews',
+      productCollection: ProductCollection.DISH,
+     })
+     .then((data) => {
+      
+      
+      setPopularDishes(data)
+     })
+     .catch((err) => console.log(err)
+     )
+  }, []);
 
   
   
