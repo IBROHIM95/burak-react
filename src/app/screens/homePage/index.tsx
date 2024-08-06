@@ -17,9 +17,6 @@ import { Member } from "../../../lip/types/member";
 import MemberService from "../../service/MemberService";
 
 
-
-
-
 const actionDispatch = (dispatch: Dispatch) => ({
   setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
   setNewDishes: (data: Product[]) => dispatch(setNewDishes(data)),
@@ -28,15 +25,13 @@ const actionDispatch = (dispatch: Dispatch) => ({
 
 
 
+
+
  export default function HomePage() {
    const {setPopularDishes, setNewDishes, setTopUsers} = actionDispatch(useDispatch());
-   
   
-
    console.log(process.env.REACT_APP_API_URL);
    
-  
-
   useEffect(() => {
     const product = new ProductService();
     product
@@ -47,6 +42,7 @@ const actionDispatch = (dispatch: Dispatch) => ({
       productCollection: ProductCollection.DISH,
      })
      .then((data) => {
+     console.log('data', data);
       
       
       setPopularDishes(data)
@@ -72,12 +68,10 @@ const actionDispatch = (dispatch: Dispatch) => ({
      member
      .getTopUsers()
      .then((data) => setTopUsers(data))
-      
+     .catch((err) => console.log(err))
 
   }, []);
 
-  
-  
     return <div className={'homepage'} >
       <Statistics/>
       <PopularDishes/>

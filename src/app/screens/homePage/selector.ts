@@ -1,19 +1,39 @@
-import { createSelector } from "reselect";
-import { AppRootState } from "../../../lip/types/screen";
+// import { createSelector } from "reselect";
+// import { AppRootState } from "../../../lip/types/screen";
 
 
-const selectHomePage  = (state: AppRootState) => state.homePage;
+// const selectHomePage  = (state: AppRootState) => state.homePage;
 
-export const retrievePopularDishes = createSelector(
+// export const retrievePopularDishes = createSelector(
+//     selectHomePage,
+//     (HomePage) => HomePage.popularDishes
+// );
+// export const retrieveNewDishes = createSelector(
+//     selectHomePage,
+//     (HomePage) => HomePage.newDishes
+// );
+// export const retrieveTopUsers = createSelector(
+//     selectHomePage,
+//     (HomePage) => HomePage.topUsers
+// );
+
+import { createSelector } from 'reselect';
+ import { AppRootState } from "../../../lip/types/screen";
+
+
+ const selectHomePage = (state: AppRootState) => state.homePage;
+
+ export const retrievePopularDishes = createSelector(
     selectHomePage,
     (HomePage) => HomePage.popularDishes
-);
-export const retrieveNewDishes = createSelector(
+ );
+
+ export const retrieveNewDishes = createSelector(
     selectHomePage,
     (HomePage) => HomePage.newDishes
-);
-export const retrieveTopUsers = createSelector(
+ );
+
+ export const retrieveTopUsers = createSelector(
     selectHomePage,
     (HomePage) => HomePage.topUsers
-);
-
+ );

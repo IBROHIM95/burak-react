@@ -16,7 +16,7 @@ import { Product } from "../../../lip/types/product";
 import { ProductCollection } from "../../../lip/enums/product.enum";
 
 const newDishesRetriever = createSelector(
-  retrieveNewDishes,
+  retrieveNewDishes ,
   (newDishes) => ({newDishes})
 )
 
@@ -30,7 +30,7 @@ export default function NewDishes() {
             <Stack className="cards-frame" >
               <CssVarsProvider>
                 {newDishes.length !== 0 ? (
-                    newDishes.map((product: Product) => {
+                    newDishes?.map((product: Product) => {
                       const imagePath = `${serverApi}/${product.productImage[0]}`
                       const sizeVolume = 
                       product.productCollection === ProductCollection.DRINK

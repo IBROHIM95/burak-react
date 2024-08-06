@@ -10,21 +10,17 @@ import { AspectRatio } from "@mui/joy";
 
 import {createSelector,} from 'reselect'
 import {  useSelector } from "react-redux";
-import { retrievePopularDishes } from "./selector";
+import {  retrieveTopUsers } from "./selector";
 import { serverApi } from "../../../lip/config";
 import { Member } from "../../../lip/types/member";
 
 
 
 
-
-
 const topUsersRetriever = createSelector(
-  retrievePopularDishes,
+  retrieveTopUsers,
   (topUsers) => ({topUsers})
 )
-
-
 
 
 export default function ActiveUsers() {
@@ -37,7 +33,7 @@ export default function ActiveUsers() {
             <Stack className="cards-frame" >
               <CssVarsProvider>
                 {topUsers.length !== 0 ? (
-                    topUsers.map((member: Member) => {
+                    topUsers.map((member: Member ) => {
                       const imagePath = `${serverApi}/${member.memberImage}`
                     return (        
                  <Card key={member._id  } variant="outlined"  >
@@ -79,3 +75,4 @@ export default function ActiveUsers() {
       </div>  
     )
 }
+ 
