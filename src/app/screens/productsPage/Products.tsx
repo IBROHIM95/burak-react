@@ -4,10 +4,23 @@ import  RemoveRedEyeIcon  from '@mui/icons-material/RemoveRedEye'
 import { Badge, Box, Button, Container, Pagination, PaginationItem, Stack } from '@mui/material'
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
-import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrieveProducts } from "./selector";
+import { Product } from "../../../lip/types/product";
+import {  Dispatch } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+import { setProducts } from './slice';
+
+const actionDispatch = (dispatch: Dispatch) => ({
+  setProducts: (data: Product[]) => dispatch( setProducts(data)),
+  
+});
+
+const productsRetriever = createSelector(retrieveProducts, (products) => ({ products }));
 
 
 
