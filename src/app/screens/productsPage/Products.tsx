@@ -101,11 +101,11 @@ export default function  Products() {
                     sx={{ p: '2px 4px',height:'30px', display: 'flex', alignItems: 'center', justifyContent:'space-around',  borderRadius: '130px' }}
                     >
                     <Stack alignItems={'start'} flexDirection={'row'} >
-                    <input
-                    //  sx={{ ml: 1, flex: 1, }}
+                    <InputBase
+                     sx={{ ml: 1, flex: 1, }}
                      name={"singleResearch"}
                      placeholder="Type here"
-                    //  inputProps={{ 'aria-label': 'Type here' }}
+                     inputProps={{ 'aria-label': 'Type here' }}
                      type='search'
                      value={searchText}
                      onChange={(e) => {
@@ -216,7 +216,7 @@ export default function  Products() {
                     })
                   ): <Box className= {'no-data'} > Products are not aviable </Box>}
                 </Stack>
-                <Stack className={'dishes-filter-box'} >
+                <Stack  className={'dishes-filter-box2'} >
                   <Button 
                     variant='contained'
                     color={
