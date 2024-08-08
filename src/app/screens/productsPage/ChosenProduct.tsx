@@ -13,7 +13,7 @@ import { FreeMode, Navigation, Thumbs } from "swiper";
 
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import { retrieveChosenProduct, retrieveProducts, retrieveRestaurant } from "./selector";
+import { retrieveChosenProduct, retrieveRestaurant } from "./selector";
 import { Product } from "../../../lip/types/product";
 import {  Dispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
