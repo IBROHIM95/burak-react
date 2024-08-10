@@ -23,6 +23,7 @@ import ProductService from "../../service/ProductService";
 import { Member } from "../../../lip/types/member";
 import MemberService from "../../service/MemberService";
 import { serverApi } from "../../../lip/config";
+import { CartItem } from "../../../lip/types/search";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setRestaurant: (data: Member) => dispatch( setRestaurant(data)),
@@ -33,10 +34,13 @@ const actionDispatch = (dispatch: Dispatch) => ({
 const chosenProductsRetriever = createSelector(retrieveChosenProduct, (chosenProduct) => ({chosenProduct }));
 const restaurantRetriever = createSelector(retrieveRestaurant, (restaurant) => ({ restaurant }));
 
+interface ChosenProductsProps {
+  onAdd: (item: CartItem) => void;
+}
 
 
-export default function ChosenProduct() {
-
+export default function ChosenProduct(props:ChosenProductsProps ) {
+  const {onAdd} = props;
   const {productId} = useParams<{productId: string}>();
   const {setRestaurant, setChosenProduct} = actionDispatch(useDispatch())
   const {chosenProduct} = useSelector(chosenProductsRetriever );

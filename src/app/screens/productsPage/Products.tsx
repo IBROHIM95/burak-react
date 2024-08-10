@@ -18,18 +18,27 @@ import ProductService from '../../service/ProductService';
 import { ProductCollection } from '../../../lip/enums/product.enum';
 import { serverApi } from '../../../lip/config';
 import { useHistory } from 'react-router-dom';
+import { CartItem } from '../../../lip/types/search';
 
+//slicedan kelgan actionlar orqali setproducts comandasi yaratdik
 const actionDispatch = (dispatch: Dispatch) => ({
-  setProducts: (data: Product[]) => dispatch( setProducts(data)),  
+  setProducts: (data: Product[]) => dispatch( setProducts(data)), //action orqali datani yozib beradi  
 });
-const productRetriever = createSelector(retrieveProducts, (products) => ({
-  products
-}) )
+//selector comandasi
+const productRetriever = createSelector(retrieveProducts, 
+  (products) => ({products})  //productsni ichidan productsni ajratib oldik
+ )
+ 
+ interface ProductsProps {
+  onAdd: (item: CartItem) => void;
+}
+ 
 
-
-export default function  Products() {
-  const {setProducts} = actionDispatch(useDispatch());
-  const {products} = useSelector(productRetriever);
+export default function  Products(props: ProductsProps) {
+  const {onAdd} = props;
+  const {setProducts} = actionDispatch(useDispatch());// setProducts orqali reducerga malumot yozamiz
+  const {products} = useSelector(productRetriever); //products bu - avtomatiski yangilangan malumot 
+        //productSearch nomli object yasadik, backendan kelgan malumotni shu objectga bog'lab qo'yamiz yani argument qilib beramiz
   const [productSearch, setProductSearch] = useState<ProductInquery>({
       page: 1,
       limit: 2,
@@ -44,29 +53,31 @@ export default function  Products() {
   useEffect(() => {
     const product = new ProductService();
     product
-    .getProducts(productSearch)
-    .then((data)=> setProducts(data))
+    .getProducts(productSearch) //yaratgan objectni argument qilib berib, backendan kelgan malumotni bitta objectga ulab qo'yayapmiz
+    .then((data)=> setProducts(data))//slice comandamiz orqali reduxga malumot yozamiz
     .catch((err) => console.log(err))
-  }, [productSearch]);
+  }, [productSearch]);//didupdate
 
+  // searchni ichidagi malumot o'chirilganda datalarni yana qaytadan chaqirib oladi shu uchun useEffect ishlatdik
   useEffect(() => {
    if(searchText === "") {
     productSearch.search = "";
-    setProductSearch({...productSearch})
-   }
+    setProductSearch({...productSearch})//objectlarni referancelari ham o'zgarishi kerak shu uchun 3 nuqta qoydik,  
+   }                                    // agar referance o'zgarmasa object ishga tushmaydi 
   }, [ searchText])
 
-  /**  HANDLERS  **/
-
+  /**  HANDLERS  **/ 
+  //backenddan hamma malumot keladi, bu malumotlarni boshqarish uchun handlerlardan foydalanamiz
   const searchCollectionHandler = (collection: ProductCollection) => {
     productSearch.page = 1;
     productSearch.productCollection = collection;
     setProductSearch({...productSearch})
   };
-
+ // asos qilib olgan objectimizda o'zgarishlarni kiritdik va setProductSearch orqali frontentda qurib oldik 
   const searchOrderHandler = (order: string) => {
     productSearch.page = 1;
     productSearch.order = order;
+                     // asosiy objectimizni oldiga 3ta nuqta qo'ymasak yangi object yasalmaydi
     setProductSearch({...productSearch})
   }
 
@@ -188,7 +199,17 @@ export default function  Products() {
                                     sx={{backgroundImage: `url(${imagePath})`}}  
                                      >
                                     <div className='product-sale' >{sizeVolume} </div>
-                                    <Button className={'shop-btn'} >
+                                    <Button className={'shop-btn'}
+                                        onClick={(e) => {
+                                          onAdd({
+                                            _id: product._id,
+                                            quantity: 1,
+                                            name: product.productName,
+                                            price: product.productPrice,
+                                            image: product.productImage[0],
+                                          })
+                                          e.stopPropagation()
+                                        }}>
                                        <img alt='' src={'icons/shopping-cart.svg'}
                                             style={{display:'flex'}} />
                                     </Button>

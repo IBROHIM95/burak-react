@@ -6,8 +6,15 @@ import Menu from "@mui/material/Menu";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useHistory } from "react-router-dom";
+import { CartItem } from "../../../lip/types/search";
+import { serverApi } from "../../../lip/config";
 
-export default function Basket() {
+interface BasketProps {
+  cartItems: CartItem[];
+}
+
+export default function Basket(props:BasketProps) {
+  const {cartItems} =props
   const authMember = null;
   const history = useHistory();
 
@@ -33,7 +40,7 @@ export default function Basket() {
         onClick={handleClick}
       >
         <Badge badgeContent={3} color="secondary">
-          <img src={"/icons/shopping-cart.svg"} />
+          <img alt="" src={"/icons/shopping-cart.svg"} />
         </Badge>
       </IconButton>
       <Menu
@@ -73,18 +80,25 @@ export default function Basket() {
       >
         <Stack className={"basket-frame"}>
           <Box className={"all-check-box"}>
-            <div>Cart is empty!</div>
+            {cartItems.length === 0 
+            ? (<div>Cart is empty!</div>   )
+            : (<div>Cart products</div>)  
+            }
+         
           </Box>
 
           <Box className={"orders-main-wrapper"}>
             <Box className={"orders-wrapper"}>
-              <Box className={"basket-info-box"}>
+              {cartItems.map((item: CartItem) => {
+                const imagePath = `${serverApi}/${item.image}`
+                return (
+                   <Box className={"basket-info-box"}>
                 <div className={"cancel-btn"}>
                   <CancelIcon color={"primary"} />
                 </div>
-                <img alt="" src={"/img/fresh.webp"} className={"product-img"} />
-                <span className={"product-name"}>Kebab</span>
-                <p className={"product-price"}>$10 x 1</p>
+                <img alt="" src={imagePath} className={"product-img"} />
+                <span className={"product-name"}>{item.name}</span>
+                <p className={"product-price"}>${item.price} * {item.quantity}</p>
                 <Box sx={{ minWidth: 120 }}>
                   <div className="col-2">
                     <button className="remove">-</button>{" "}
@@ -92,6 +106,9 @@ export default function Basket() {
                   </div>
                 </Box>
               </Box>
+                )
+              } )}
+             
             </Box>
           </Box>
           <Box className={"basket-order"}>
