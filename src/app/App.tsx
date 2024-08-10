@@ -36,6 +36,8 @@ function App() {
          onRemove= {onRemove}
          onDelete= {onDelete}
          DeleteAll= {DeleteAll}
+         SetSignupOpen={SetSignupOpen}
+         SetlLoginOpen={SetlLoginOpen}
          
          /> : 
         <OtherNavbar 
@@ -44,6 +46,7 @@ function App() {
         onRemove= {onRemove}
         DeleteAll= {DeleteAll}
         onDelete= {onDelete}
+        SetlLoginOpen={SetlLoginOpen}
         />}
          <Switch>
          <Route path="/products">

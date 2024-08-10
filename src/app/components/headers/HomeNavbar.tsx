@@ -10,27 +10,14 @@ interface HomeNavbarProps {
  onRemove: (item: CartItem) => void
  onDelete: (item: CartItem) => void
  DeleteAll: () => void
+ SetSignupOpen: (isOpen: boolean) => void
+ SetlLoginOpen:  (isOpen: boolean) => void
 }
 
 export default function HomeNavbar(props: HomeNavbarProps) {
-  const {cartItems, onAdd, onRemove, DeleteAll, onDelete} =props
+  const {cartItems, onAdd,SetlLoginOpen, SetSignupOpen, onRemove, DeleteAll, onDelete} =props
     const authMember = null;
-    const [count, setCount] = useState<number>(0);
-    const [value, setValue] = useState<boolean>(true);
-
-    useEffect(()  =>{
-      console.log('componentDidMount'); //DATA FETCH
-      setCount(count + 1);
-
-      return () => {
-        console.log('componentWillUnmount');
-        
-      }
-    }, [value])
-
-    const Handler = () => {
-      setValue(!value)
-    }
+    
     return <div className="home-navbar" > 
     
     <Container className="navbar-container" >
@@ -70,7 +57,8 @@ export default function HomeNavbar(props: HomeNavbarProps) {
              onDelete= {onDelete}  />
             {!authMember  ? (
                 <Box className= {'hover-line'} >
-                    <Button variant="contained" className="login-button"  > Login </Button>
+                    <Button variant="contained" className="login-button"
+                    onClick={() => SetlLoginOpen(true) }  > Login </Button>
                 </Box>
             ) : (<img alt=""
                 className="user-avatar"
@@ -84,11 +72,11 @@ export default function HomeNavbar(props: HomeNavbarProps) {
           <Stack className="detail" >
            <Box className="head-main-text" >World's Most Delecios Cousine</Box>    
            <Box className="wel-text" >The Choice, not just a choice</Box>    
-           <Box className="service-text" >{count} hours service</Box>    
+           <Box className="service-text" > hours service</Box>    
            <Box className="signup" >
             {!authMember ? (
               <Button variant={'contained'} className="signup-button"  
-              onClick={Handler} >
+              onClick={() => SetSignupOpen(true)} >
                 SIGN UP        
               </Button>
             ) : null }
