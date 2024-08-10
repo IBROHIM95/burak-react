@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-
-import '../css/app.css';
 import {  Route, Switch, useLocation } from 'react-router-dom';
 import HomePage from './screens/homePage/index';
 import ProductPage from './screens/productsPage';
@@ -9,19 +7,25 @@ import UserPage from './screens/userPage';
 import  HomeNavbar  from './components/headers/HomeNavbar';
 import  OtherNavbar  from './components/headers/OtherNavbar';
 import Footer  from './components/footer';
-import '../css/navbar.css'
-import '../css/app.css'
-import '../css/footer.css'
 import HelpPage from './screens/helpPage';
 import { CartItem } from '../lip/types/search';
 import useBasket from './hooks/useBasket';
-
+import '../css/navbar.css'
+import '../css/app.css'
+import '../css/footer.css'
+import AuthenticationModal from './components/auth';
 
 function App() {
   const location = useLocation();
 
   const {cartItems, onAdd, DeleteAll,  onRemove, onDelete,} = useBasket();
+  const [signupOpen, SetSignupOpen] = useState<boolean>(false)
+  const [loginOpen, SetlLoginOpen] = useState<boolean>(false)
+  
+  //HANDLERS
 
+  const handleSignupClose = () => SetSignupOpen(false)
+  const handleLoginClose = () => SetlLoginOpen(false)
   
   return (
     <>
@@ -60,6 +64,12 @@ function App() {
         </Switch>
         <Footer/>
     
+        <AuthenticationModal
+          signupOpen={signupOpen}
+          loginOpen={loginOpen}
+          handleSignupClose={handleSignupClose}
+          handleLoginClose={handleLoginClose}
+          />
     </>
   );
 }
