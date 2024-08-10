@@ -5,11 +5,15 @@ import { CartItem } from "../../../lip/types/search";
 
 interface OtherNavbarProps  {
  cartItems: CartItem[];
+ onAdd: (item: CartItem) => void
+ onRemove: (item: CartItem) => void
+ onDelete: (item: CartItem) => void
+ DeleteAll: () => void
 }
 
 
 export default function OtherNavbar(props:OtherNavbarProps) {
-    const {cartItems} = props;
+    const {cartItems, onAdd, onRemove, DeleteAll, onDelete} = props;
     const authMember = null
     return <div className="other-navbar" >
         
@@ -42,7 +46,12 @@ export default function OtherNavbar(props:OtherNavbarProps) {
             <Box className= {'hover-line'} >
               <NavLink activeClassName={'underline'} to='/help' >Help</NavLink>
             </Box>   
-            <Basket cartItems={cartItems} />
+            <Basket 
+            cartItems={cartItems}
+            onAdd={onAdd}
+            onRemove= {onRemove}
+            DeleteAll= {DeleteAll}
+            onDelete= {onDelete} />
             {!authMember  ? (
                 <Box className= {'hover-line'} >
                     <Button variant="contained" className="login-button"  > Login </Button>
