@@ -41,7 +41,7 @@ export default function  Products(props: ProductsProps) {
         //productSearch nomli object yasadik, backendan kelgan malumotni shu objectga bog'lab qo'yamiz yani argument qilib beramiz
   const [productSearch, setProductSearch] = useState<ProductInquery>({
       page: 1,
-      limit: 2,
+      limit: 8,
       order: 'createdAt',
       productCollection: ProductCollection.DISH,
       search: "",
@@ -132,7 +132,7 @@ export default function  Products(props: ProductsProps) {
                         <Box paddingLeft={'5px'} color='#d7b586' >SEARCH</Box>
                         <Box  >
                         <Button 
-                        endIcon= {<SearchIcon sx={{    color: 20 ? '#d7b586' : 'white',}} />}
+                        endIcon= {<SearchIcon sx={{ mr:"35px",    color: 20 ? '#d7b586' : 'white',}} />}
             
                         sx={{position:'relative', height: '30px'}}  
                         aria-label="earch"
