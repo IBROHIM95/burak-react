@@ -14,18 +14,46 @@ import '../css/navbar.css'
 import '../css/app.css'
 import '../css/footer.css'
 import AuthenticationModal from './components/auth';
+import { T } from '../lip/types/common';
+import { sweetErrorHandling, sweetTopSuccessAlert } from '../lip/sweetAlert';
+import { Messages } from '../lip/config';
+import MemberService from './service/MemberService';
+import { useGlobal } from './hooks/useGlobals';
 
 function App() {
   const location = useLocation();
 
+  const{setAuthMember} = useGlobal()
   const {cartItems, onAdd, DeleteAll,  onRemove, onDelete,} = useBasket();
   const [signupOpen, SetSignupOpen] = useState<boolean>(false)
   const [loginOpen, SetlLoginOpen] = useState<boolean>(false)
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
   
   //HANDLERS
 
   const handleSignupClose = () => SetSignupOpen(false)
   const handleLoginClose = () => SetlLoginOpen(false)
+  const handLogoutClick = (e:React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(e.currentTarget)
+  };
+  const handCloseLogout = () => setAnchorEl(null)
+  const handlLoguotRequest = async () => {
+    try{
+
+      const member = new MemberService()
+      await member.logout();
+
+      await sweetTopSuccessAlert("success", 1100)
+      setAuthMember(null)
+    }catch(err){
+      console.log(err);
+      sweetErrorHandling(Messages.error1)
+      
+    }
+  } 
+    
+  
+  
   
   return (
     <>
@@ -38,7 +66,10 @@ function App() {
          DeleteAll= {DeleteAll}
          SetSignupOpen={SetSignupOpen}
          SetlLoginOpen={SetlLoginOpen}
-         
+         anchorEl={anchorEl}
+         handLogoutClick={handLogoutClick}
+         handCloseLogout={handCloseLogout}
+         handlLoguotRequest={handlLoguotRequest}
          /> : 
         <OtherNavbar 
         cartItems={cartItems}
@@ -47,6 +78,10 @@ function App() {
         DeleteAll= {DeleteAll}
         onDelete= {onDelete}
         SetlLoginOpen={SetlLoginOpen}
+        anchorEl={anchorEl}
+        handLogoutClick={handLogoutClick}
+        handCloseLogout={handCloseLogout}
+        handlLoguotRequest={handlLoguotRequest}
         />}
          <Switch>
          <Route path="/products">

@@ -11,6 +11,7 @@ import { Messages } from "../../../lip/config";
 import { LoginInput, MemberInput } from "../../../lip/types/member";
 import MemberService from "../../service/MemberService";
 import { sweetErrorHandling } from "../../../lip/sweetAlert";
+import { useGlobal } from "../../hooks/useGlobals";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -48,6 +49,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
   const [memberNick, setMemberNick] = useState<string>('')
   const [memberPhone, setMemberPhone] = useState<string>('')
   const [memberPassword, setMemberPassword] = useState<string>('')
+  const {setAuthMember} = useGlobal()
 
   /** HANDLERS **/
 
@@ -67,7 +69,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
     if(e.key === 'Enter' && signupOpen){
       handleSignupRequest().then();
     }else if(e.key === 'Enter' && signupOpen){
-      
+      handleLoginRequest().then()
     }
   }
 
@@ -85,10 +87,11 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
 
       const member = new MemberService();
       const result = await member.signup(signUpInput);
-     
+
+     // Saving authenticated user
+      setAuthMember(result)
       handleSignupClose();
-      
-    }catch(err){
+      }catch(err){
       console.log(err);
       handleSignupClose();
       sweetErrorHandling(err).then()
@@ -110,7 +113,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
 
       const member = new MemberService();
       const result = await member.login(loginInput);
-     
+      setAuthMember(result)
       handleLoginClose();
       
     }catch(err){
